@@ -9,14 +9,14 @@
 (package-initialize) ;; You might already have this line
  (defvar mswindows-p (string-match "windows" (symbol-name system-type)))
 
-(require 'omnisharp)
-(add-hook 'csharp-mode-hook 'omnisharp-mode)
-;(setq omnisharp-server-executable-path  "/Users/nstares/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe")
-(require 'helm-config)
-(require 'company)
-(eval-after-load
- 'company
- '(add-to-list 'company-backends 'company-omnisharp))
+;; (require 'omnisharp)
+;; (add-hook 'csharp-mode-hook 'omnisharp-mode)
+;; ;(setq omnisharp-server-executable-path  "/Users/nstares/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe")
+;; (require 'helm-config)
+;; (require 'company)
+;; (eval-after-load
+;;  'company
+;;  '(add-to-list 'company-backends 'company-omnisharp))
 
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
@@ -27,19 +27,19 @@
 
 (setq ring-bell-function 'ignore)
 
-(defun load-directory (directory)
-  "Load recursively all `.el' files in DIRECTORY."
-  (dolist (element (directory-files-and-attributes directory nil nil nil))
-    (let* ((path (car element))
-           (fullpath (concat directory "/" path))
-           (isdir (car (cdr element)))
-           (ignore-dir (or (string= path ".") (string= path ".."))))
-      (cond
-       ((and (eq isdir t) (not ignore-dir))
-        (load-directory fullpath))
-       ((and (eq isdir nil) (string= (substring path -3) ".el"))
-        (load (file-name-sans-extension fullpath)))))))
-(load-directory "~/.emacs.d/config")
+;; (defun load-directory (directory)
+;;   "Load recursively all `.el' files in DIRECTORY."
+;;   (dolist (element (directory-files-and-attributes directory nil nil nil))
+;;     (let* ((path (car element))
+;;            (fullpath (concat directory "/" path))
+;;            (isdir (car (cdr element)))
+;;            (ignore-dir (or (string= path ".") (string= path ".."))))
+;;       (cond
+;;        ((and (eq isdir t) (not ignore-dir))
+;;         (load-directory fullpath))
+;;        ((and (eq isdir nil) (string= (substring path -3) ".el"))
+;;         (load (file-name-sans-extension fullpath)))))))
+;; (load-directory "~/.emacs.d/config")
 
 
 
