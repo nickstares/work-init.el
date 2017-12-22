@@ -18,6 +18,13 @@
 ;;  'company
 ;;  '(add-to-list 'company-backends 'company-omnisharp))
 
+
+
+
+
+(menu-bar-mode -1)
+(global-unset-key (kbd "C-x C-r"))
+(global-set-key (kbd "C-x C-r") 'helm-recentf)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
@@ -167,13 +174,15 @@
 
 
 (custom-set-variables
+
+ '(initial-buffer-choice 'eshell)
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (avy helm-ag-r ag org org-jira helm-projectile projectile magit company helm-ag omnisharp helm monokai-theme))))
+    (achievements avy helm-ag-r ag org org-jira helm-projectile projectile magit company helm-ag omnisharp helm monokai-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
