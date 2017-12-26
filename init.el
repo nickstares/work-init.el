@@ -19,6 +19,9 @@
 ;;  '(add-to-list 'company-backends 'company-omnisharp))
 
 
+(require 'magit-gh-pulls)
+(add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)
+
 
 
 
@@ -104,7 +107,8 @@
 (defun magit-publish ()
   (interactive)
   (when (yes-or-no-p "Publish this branch? ")
-    (eshell-command "git push -u origin $(git symbolic-ref --short HEAD)")))
+    (eshell-command
+     (format "git push -u origin %s" (magit-get-current-branch)))))
 
 (global-set-key (kbd "C-x m p") 'magit-publish)
 
@@ -178,10 +182,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(initial-buffer-choice (quote eshell))
  '(package-selected-packages
    (quote
-    (ace-window achievements avy helm-ag-r ag org org-jira helm-projectile projectile magit company helm-ag omnisharp helm monokai-theme))))
+    (magit-gh-pulls achievements avy helm-ag-r ag org org-jira helm-projectile projectile magit company helm-ag omnisharp helm monokai-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
