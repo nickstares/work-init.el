@@ -118,6 +118,12 @@
 
 (setq ag-executable "C:/Users/nstares/Downloads/ag/ag.exe")
 
+(global-set-key (kbd "C-c j") 'avy-goto-word-1)
+
+(global-unset-key (kbd "C-x o"))
+(global-set-key (kbd "C-x o") 'ace-window)
+
+
 (avy-setup-default)
 
 ;; TIM LICATA's C-w
@@ -190,4 +196,5 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(avy-lead-face ((t (:background "#e52b50" :foreground "white" :height 1.3 :width extra-expanded))))
+ '(avy-lead-face-0 ((t (:background "#4f57f9" :foreground "white" :height 1.3)))))
