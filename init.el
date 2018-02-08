@@ -23,7 +23,7 @@
 (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)
 
 
-
+(add-to-list 'exec-path "C:/cygwin64/bin/")
 
 (menu-bar-mode -1)
 (global-unset-key (kbd "C-x C-r"))
@@ -36,21 +36,6 @@
 
 
 (setq ring-bell-function 'ignore)
-
-;; (defun load-directory (directory)
-;;   "Load recursively all `.el' files in DIRECTORY."
-;;   (dolist (element (directory-files-and-attributes directory nil nil nil))
-;;     (let* ((path (car element))
-;;            (fullpath (concat directory "/" path))
-;;            (isdir (car (cdr element)))
-;;            (ignore-dir (or (string= path ".") (string= path ".."))))
-;;       (cond
-;;        ((and (eq isdir t) (not ignore-dir))
-;;         (load-directory fullpath))
-;;        ((and (eq isdir nil) (string= (substring path -3) ".el"))
-;;         (load (file-name-sans-extension fullpath)))))))
-;; (load-directory "~/.emacs.d/config")
-
 
 
 
@@ -104,6 +89,30 @@
   (eshell-command "cd c:/Users/nstares/MosoClub/MosoLite-Prod/MosoLiteWeb/MosoLite.Web/")
   (message "Changed directory to MosoClub repo"))
 
+
+(setq completions '("sand1 - remote" "phgdelmarva - local"))
+
+
+(setq config-files '(("sand1 - remote" . "sand1.config") ("phgdelmarva - local" . "LIS32PHGDELMARVA.config")))
+
+
+(defun change-web-config()
+  (interactive)
+  (let ((filename
+	 (cdr (assoc (completing-read "config file: " completions)
+		     config-files))))
+    (eshell-command (format "cp /Users/nstares/Web/%s /Users/nstares/Web/Web.config" filename)))
+  (reset-web-config))
+  
+  (global-set-key (kbd "C-c c w") 'change-web-config)
+         
+
+
+(defun phgde ()
+  (interactive)
+  (let ((shared "~/MosoClub/MosoLite-Prod/MosoLiteWeb/MosoLite.Web/Content/Shared/"))
+    (eshell-command (format "mkdir %s/PHGDE ; mkdir %s/PHGDE/PDFReports" shared shared))))
+
 (defun magit-publish ()
   (interactive)
   (when (yes-or-no-p "Publish this branch? ")
@@ -118,11 +127,10 @@
 
 (setq ag-executable "C:/Users/nstares/Downloads/ag/ag.exe")
 
-(global-set-key (kbd "C-c j") 'avy-goto-word-1)
+(global-set-key (kbd "C-c j") 'avy-goto-char-2)
 
 (global-unset-key (kbd "C-x o"))
 (global-set-key (kbd "C-x o") 'ace-window)
-
 
 (avy-setup-default)
 
@@ -146,43 +154,6 @@
             (define-key ido-file-completion-map "\C-w" 'ido-delete-backward-word-updir)))
 
 
-;; (require 'helm-ag-r)
-
-
-;; (setq helm-ag-r-option-list
-;;       '("-S -U --hidden"
-;;         "-S -U -l"))
-
-;; helm-ag-r-current-file -- search from current file
-;; helm-ag-r-from-git-repo -- search from git repository
-;; helm-ag-r-shell-history -- search shell history
-;; helm-ag-r-git-logs -- search git logs
-;; helm-ag-r-google-contacts-list -- show your google-contacts
-
-
-
-;;;;;;;;;; ORG-JIRA ;;;;;;;;;;;;;;
-;; (define-key org-jira-map (kbd "C-c pg") 'org-jira-get-projects)
-;; (define-key org-jira-map (kbd "C-c ib") 'org-jira-browse-issue)
-;; (define-key org-jira-map (kbd "C-c ig") 'org-jira-get-issues)
-;; (define-key org-jira-map (kbd "C-c ih") 'org-jira-get-issues-headonly)
-;; (define-key org-jira-map (kbd "C-c iu") 'org-jira-update-issue)
-;; (define-key org-jira-map (kbd "C-c iw") 'org-jira-progress-issue)
-;; (define-key org-jira-map (kbd "C-c in") 'org-jira-progress-issue-next)
-;; (define-key org-jira-map (kbd "C-c ia") 'org-jira-assign-issue)
-;; (define-key org-jira-map (kbd "C-c ir") 'org-jira-refresh-issue)
-;; (define-key org-jira-map (kbd "C-c iR") 'org-jira-refresh-issues-in-buffer)
-;; (define-key org-jira-map (kbd "C-c ic") 'org-jira-create-issue)
-;; (define-key org-jira-map (kbd "C-c ik") 'org-jira-copy-current-issue-key)
-;; (define-key org-jira-map (kbd "C-c sc") 'org-jira-create-subtask)
-;; (define-key org-jira-map (kbd "C-c sg") 'org-jira-get-subtasks)
-;; (define-key org-jira-map (kbd "C-c cu") 'org-jira-update-comment)
-;; (define-key org-jira-map (kbd "C-c wu") 'org-jira-update-worklogs-from-org-clocks)
-;; (define-key org-jira-map (kbd "C-c tj") 'org-jira-todo-to-jira)
-;; (define-key org-jira-map (kbd "C-c if") 'org-jira-get-issues-by-fixversion)
-
-
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -190,7 +161,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (magit-gh-pulls achievements avy helm-ag-r ag org org-jira helm-projectile projectile magit company helm-ag omnisharp helm monokai-theme))))
+    (evil web-mode magit-gh-pulls achievements avy helm-ag-r ag org org-jira helm-projectile projectile magit company helm-ag omnisharp helm monokai-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -198,3 +169,4 @@
  ;; If there is more than one, they won't work right.
  '(avy-lead-face ((t (:background "#e52b50" :foreground "white" :height 1.3 :width extra-expanded))))
  '(avy-lead-face-0 ((t (:background "#4f57f9" :foreground "white" :height 1.3)))))
+(put 'set-goal-column 'disabled nil)
