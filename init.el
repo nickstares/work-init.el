@@ -29,6 +29,7 @@
 (global-unset-key (kbd "C-x C-r"))
 (global-set-key (kbd "C-x C-r") 'helm-recentf)
 (global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-x C-m") 'helm-M-x )
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
@@ -90,10 +91,15 @@
   (message "Changed directory to MosoClub repo"))
 
 
-(setq completions '("sand1 - remote" "phgdelmarva - local"))
+(setq completions '("sand1 - remote"
+		    "phgdelmarva - local"
+		    "mattweb - sand1 remote" ))
 
 
-(setq config-files '(("sand1 - remote" . "sand1.config") ("phgdelmarva - local" . "LIS32PHGDELMARVA.config")))
+(setq config-files '(("sand1 - remote" . "sand1.config")
+		     ("phgdelmarva - local" . "LIS32PHGDELMARVA.config")
+		     ("mattweb - sand1 remote" . "mattweb.config")
+		     ))
 
 
 (defun change-web-config()
@@ -161,7 +167,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (evil web-mode magit-gh-pulls achievements avy helm-ag-r ag org org-jira helm-projectile projectile magit company helm-ag omnisharp helm monokai-theme))))
+    (cider evil web-mode magit-gh-pulls achievements avy helm-ag-r ag org org-jira helm-projectile projectile magit company helm-ag omnisharp helm monokai-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
